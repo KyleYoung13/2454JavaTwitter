@@ -7,10 +7,25 @@ and open the template in the editor.
 <html>
     <head>
         <title>TODO supply a title</title>
-        <meta charset="windows-1252">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <a href="hopperServlet?action=userlist">List Users</a>
+        <h2>Add User</h2>
+        <form action="hopper" method="post">
+            <div>
+                <label>Username</label>
+                <input type="text" name="username"/></br> 
+                <label>Password</label>
+                <input type="password" name="password"/></br> 
+            </div>
+            <div>
+                <input type='hidden' name='action' value='addUser'/>
+                <input type='submit' value='Create User'/></br>
+            </div>
+        </form>
+        
+        
     </body>
 </html>
