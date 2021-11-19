@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1">
-    <servlet>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	 version="3.1">
+     <servlet>
         <servlet-name>hopperServlet</servlet-name>
-        <servlet-class>hopper.hopper</servlet-class>
+        <servlet-class>hopper.hopperServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>hopperServlet</servlet-name>
-        <url-pattern>/hopperServlet</url-pattern>
+        <url-pattern>/hopperSrervlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
