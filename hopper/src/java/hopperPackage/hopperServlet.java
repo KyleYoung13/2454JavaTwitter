@@ -2,6 +2,9 @@ package hopperPackage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -58,7 +61,7 @@ public class hopperServlet extends HttpServlet {
                 }
             }
 
-            response.sendRedirect("Twitter");
+            response.sendRedirect("hopperServlet");
         } else if (request.getParameter("action").equalsIgnoreCase("updateUser")) {
 
             String id = request.getParameter("id");
@@ -81,7 +84,7 @@ public class hopperServlet extends HttpServlet {
                     //todo give a good error message
                 }
             }
-            response.sendRedirect("Twitter");
+            response.sendRedirect("hopperServlet");
         } else if (request.getParameter("action").equalsIgnoreCase("deleteUser")) {
 
             String id = request.getParameter("id");
@@ -95,23 +98,47 @@ public class hopperServlet extends HttpServlet {
                 UserModel.deleteUser(user);
 
             }
-            response.sendRedirect("Twitter");
+            response.sendRedirect("hopperServlet");
         }
 
     }
-}
+
+    public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
+        // Static getInstance method is called with hashing SHA 
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+        // digest() method called 
+        // to calculate message digest of an input 
+        // and return array of byte
+        return md.digest(input.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static String toHexString(byte[] hash) {
+        // Convert byte array into signum representation 
+        BigInteger number = new BigInteger(1, hash);
+
+        // Convert message digest into hex value 
+        StringBuilder hexString = new StringBuilder(number.toString(16));
+
+        // Pad with leading zeros
+        while (hexString.length() < 32) {
+            hexString.insert(0, '0');
+        }
+
+        return hexString.toString();
+    }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-/**
- * Handles the HTTP <code>GET</code> method.
- *
- * @param request servlet request
- * @param response servlet response
- * @throws ServletException if a servlet-specific error occurs
- * @throws IOException if an I/O error occurs
- */
-@Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -125,7 +152,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
      * @throws IOException if an I/O error occurs
      */
     @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -136,7 +163,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
      * @return a String containing servlet description
      */
     @Override
-public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
