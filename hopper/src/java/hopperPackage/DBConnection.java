@@ -11,8 +11,7 @@ public class DBConnection {
         // force java to load the driver
         Class.forName("com.mysql.jdbc.Driver");
         // driver: // url:port / database
-        String dbURL = "jdbc:mysql://localhost:3306/hopper";
-        // this is bad form - but we don't have better ways right now
+        String dbURL = "jdbc:mysql://localhost:3306/hopperServlet";
         String username = "beer";
         String password = "beer";
         Connection connection = DriverManager.getConnection(
