@@ -41,7 +41,7 @@ public class hopperServlet extends HttpServlet {
             String password = request.getParameter("password");
 
             if (userName == null || userName.isBlank() || password == null || password.isBlank()) {
-                // todo nice error message
+                throw new ServletException("Blank input");
             } else {
 
                 try {
@@ -57,7 +57,7 @@ public class hopperServlet extends HttpServlet {
                     }
 
                 } catch (NoSuchAlgorithmException ex) {
-                    //todo give a good error message
+                    throw new ServletException("Blank input");
                 }
             }
 
@@ -69,7 +69,7 @@ public class hopperServlet extends HttpServlet {
             String password = request.getParameter("password");
 
             if (id == null || id.isBlank() || userName == null || userName.isBlank() || password == null || password.isBlank()) {
-                // todo nice error message
+                throw new ServletException("Blank input");
             } else {
 
                 try {
@@ -81,7 +81,7 @@ public class hopperServlet extends HttpServlet {
                     UserModel.updateUser(user);
 
                 } catch (NoSuchAlgorithmException ex) {
-                    //todo give a good error message
+                    throw new ServletException("Blank input");
                 }
             }
             response.sendRedirect("hopperServlet");
@@ -90,7 +90,7 @@ public class hopperServlet extends HttpServlet {
             String id = request.getParameter("id");
 
             if (id == null || id.isBlank()) {
-                // todo nice error message
+                throw new ServletException("Blank input");
             } else {
 
                 User user = new User(Integer.parseInt(id), "", "");
