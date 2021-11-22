@@ -5,7 +5,7 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@page errorPage="error.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,7 +32,7 @@
     </table>
         
         <h2>Update User</h2>
-        <form action="Twitter" method="post">
+        <form action="hopperServlet" method="post">
             <div>
                 <label>ID</label>
                 <input type="text" name="id"/></br> 
@@ -47,7 +47,7 @@
             </div>
         </form>
         <h2>Delete User</h2>
-        <form action="Twitter" method="post">
+        <form action="hopperServlet" method="post">
             <div>
                 <label>ID</label>
                 <input type="text" name="id"/></br> 
