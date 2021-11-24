@@ -28,6 +28,7 @@ public class hopperServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         if (request.getParameter("action") == null || request.getParameter("action").equalsIgnoreCase("userlist")) {
             ArrayList<User> users = UserModel.getUsers();
 
@@ -85,7 +86,7 @@ public class hopperServlet extends HttpServlet {
                 }
             }
             response.sendRedirect("hopperServlet");
-        } else if (request.getParameter("action").equalsIgnoreCase("deleteUser")) {
+        } else if (request.getParameter("action").equalsIgnoreCase("searchUser")) {
 
             String id = request.getParameter("id");
 
@@ -95,12 +96,21 @@ public class hopperServlet extends HttpServlet {
 
                 User user = new User(Integer.parseInt(id), "", "");
 
-                UserModel.deleteUser(user);
+                UserModel.searchUser(user);
 
             }
             response.sendRedirect("hopperServlet");
         }
+        
+        //START OF HOPPER HOME PAGE
+        else if (request.getParameter("action").equalsIgnoreCase("hopperHomePage")) {
+            ArrayList<hop> hopsList = hopModel.getHops();
 
+            request.setAttribute("hopsList", hopsList);
+
+            String url = "/hopperHomePage.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
     }
 
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
