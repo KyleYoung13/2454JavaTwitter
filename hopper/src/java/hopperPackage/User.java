@@ -6,16 +6,16 @@ public class User implements Serializable {
 
     private int id;
     private String userName;
-    private String passwordHash;
+    private String password;
 
     public User() {
         this(0, "", "");
     }
 
-    public User(int id, String userName, String passwordHash) {
+    public User(int id, String userName, String password) {
         this.id = id;
         this.userName = userName;
-        this.passwordHash = passwordHash;
+        this.password = password;
     }
 
     public int getId() {
@@ -34,11 +34,11 @@ public class User implements Serializable {
         this.userName = userName;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

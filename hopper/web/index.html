@@ -12,7 +12,8 @@ and open the template in the editor.
     </head>
     <body>
         <a href="hopperServlet?action=userlist">List Users</a>
-        <h2>Add User</h2>
+
+        <h2>Create User</h2>
         <form action="hopperServlet" method="post">
             <div>
                 <label>Username</label>
@@ -25,7 +26,20 @@ and open the template in the editor.
                 <input type='submit' value='Create User'/></br>
             </div>
         </form>
-        
-        
+        <h2>Login</h2>
+        <form action="hopperServlet" method="post">
+            <div>
+                <label>Username</label>
+                <input type="text" name="username"/></br> 
+                <label>Password</label>
+                <input type="password" name="password"/></br> 
+            </div>
+            <div>
+                <input type='hidden' name='action' value='loginUser'/>
+                <input type='submit' value='Login'/></br>
+            </div>
+        </form>
+
+
     </body>
 </html>

@@ -22,9 +22,9 @@ public class UserModel {
             while (results.next()) {
                 int id = results.getInt("id");
                 String username = results.getString("username");
-                String passwordHash = results.getString("password");
+                String password = results.getString("password");
 
-                users.add(new User(id, username, passwordHash));
+                users.add(new User(id, username, password));
             }
 
             results.close();
@@ -49,7 +49,7 @@ public class UserModel {
             PreparedStatement statement = connection.prepareStatement(preparedSQL);
             // first index is 1, it's ok to cry
             statement.setString(1, user.getUserName());
-            statement.setString(2, user.getPasswordHash());
+            statement.setString(2, user.getPassword());
 
             statement.execute();
 
@@ -71,7 +71,7 @@ public class UserModel {
             PreparedStatement statement = connection.prepareStatement(preparedSQL);
             // first index is 1, it's ok to cry
             statement.setString(1, user.getUserName());
-            statement.setString(2, user.getPasswordHash());
+            statement.setString(2, user.getPassword());
             statement.setInt(3, user.getId());
 
             statement.execute();

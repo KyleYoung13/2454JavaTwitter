@@ -19,18 +19,17 @@
             <tr>
                 <td>id</td>
                 <td>username</td>
-                <td>password hash</td>
+                <td>password</td>
             </tr>
         </th>
         <c:forEach var="user" items="${users}">
             <tr>
                 <td><c:out value="${user.id}" /></td>
                 <td><c:out value="${user.userName}" /></td>
-                <td><c:out value="${user.passwordHash}" /></td>
+                <td><c:out value="${user.password}" /></td>
             </tr>
         </c:forEach>
-    </table>
-        
+    </table>    
         <h2>Update User</h2>
         <form action="hopperServlet" method="post">
             <div>
