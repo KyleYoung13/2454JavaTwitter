@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = {"/hopperServlet"})
 public class hopperServlet extends HttpServlet {
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,9 +30,7 @@ public class hopperServlet extends HttpServlet {
         
         if (request.getParameter("action") == null || request.getParameter("action").equalsIgnoreCase("userlist")) {
             ArrayList<User> users = UserModel.getUsers();
-
             request.setAttribute("users", users);
-
             String url = "/UserList.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         } else if (request.getParameter("action").equalsIgnoreCase("addUser")) {
@@ -61,7 +58,6 @@ public class hopperServlet extends HttpServlet {
                     throw new ServletException("Blank input");
                 }
             }
-
             response.sendRedirect("hopperServlet");
         } else if (request.getParameter("action").equalsIgnoreCase("updateUser")) {
 
@@ -87,7 +83,9 @@ public class hopperServlet extends HttpServlet {
             }
             response.sendRedirect("hopperServlet");
         } else if (request.getParameter("action").equalsIgnoreCase("searchUser")) {
-
+            ArrayList<hop> hopList = hopModel.getUsersHops();
+            request.setAttribute("hopList", hopList);
+            
             String id = request.getParameter("id");
 
             if (id == null || id.isBlank()) {
@@ -105,9 +103,7 @@ public class hopperServlet extends HttpServlet {
         //START OF HOPPER HOME PAGE
         else if (request.getParameter("action").equalsIgnoreCase("hopperHomePage")) {
             ArrayList<hop> hopsList = hopModel.getHops();
-
             request.setAttribute("hopsList", hopsList);
-
             String url = "/hopperHomePage.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }

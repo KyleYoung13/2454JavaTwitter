@@ -40,36 +40,6 @@ public class UserModel {
         return users;
     }
     
-     public static ArrayList<hop> getUsersHops() {
-        ArrayList<hop> singlePersonHops = new ArrayList<>();
-
-        try {
-            Connection connection = DBConnection.getConnection();
-
-            Statement statement = connection.createStatement();
-
-            ResultSet results = statement.executeQuery("select * from hop where user_id = ?");
-
-            while (results.next()) {
-                int id = results.getInt("id");
-                String username = results.getString("username");
-                String password = results.getString("password");
-
-                singlePersonHops.add(new hop());
-            }
-
-            results.close();
-            statement.close();
-            connection.close();
-
-        } catch (SQLException ex) {
-            // todo something later
-        } catch (ClassNotFoundException ex) {
-            // todo something later
-        }
-
-        return singlePersonHops;
-    }
 
     public static String addUser(User user) {
         try {
