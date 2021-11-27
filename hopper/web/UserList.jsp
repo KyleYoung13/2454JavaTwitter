@@ -15,6 +15,7 @@
     <nav> 
         <a href="hopperServlet?action=userlist">List Users</a>
         <a href="hopperServlet?action=hopperHomePage">Home Page</a>
+        <a href="hopperServlet?action=personsHops">User Hops</a>
     </nav>
     <body>
         <h1>User List</h1>
@@ -51,7 +52,7 @@
     <form action="hopperServlet" method="post">
         <div>
             <label>ID</label>
-            <input type="text" name="id"/></br> 
+            <input type="text" name="user_id"/></br> 
         </div>
         <div>
             <input type='hidden' name='action' value='searchUser'/>

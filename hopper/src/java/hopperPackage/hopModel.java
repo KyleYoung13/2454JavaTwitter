@@ -41,10 +41,8 @@ public class hopModel {
         return hopsList;
     }
     
-    
     public static ArrayList<hop> getUsersHops() {
         ArrayList<hop> singlePersonHops = new ArrayList<>();
-
         try {
             Connection connection = DBConnection.getConnection();
             Statement statement = connection.createStatement();

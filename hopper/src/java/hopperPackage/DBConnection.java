@@ -10,7 +10,7 @@ public class DBConnection {
         // force java to load the driver
         Class.forName("com.mysql.jdbc.Driver");
         // driver: // url:port / database
-        String dbURL = "jdbc:mysql://localhost:3306/hopper";
+        String dbURL = "jdbc:mysql://localhost:3307/hopper";
         String username = "beer";
         String password = "beer";
         Connection connection = DriverManager.getConnection(

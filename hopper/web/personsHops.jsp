@@ -15,8 +15,26 @@
     <nav> 
         <a href="hopperServlet?action=userlist">List Users</a>
         <a href="hopperServlet?action=hopperHomePage">Home Page</a>
+        <a href="hopperServlet?action=personsHops">User Hops</a>
     </nav>
     <body>
+        <h1>Search for Users</h1>
+        <form action="hopperServlet" method="post">
+            <div>
+                <label>ID</label>
+                <input type="text" name="user_id"/></br> 
+            </div>
+            <div>
+                <input type='hidden' name='action' value='searchUser'/>
+                <input type='submit' value='Search User'/></br>
+            </div>
+        </form>
+        <form action="hopperServlet" method="post">
+            <div>
+                <input type='hidden' name='action' value='followUser'/>
+                <input type='submit' value='Follow'/></br>
+            </div>
+        </form>
         <table>
             <c:forEach var="hop" items="${singlePersonHops}">
                 <tr>
@@ -26,6 +44,6 @@
                     <td><c:out value="${hop.content}" /></td>
                 </tr>
             </c:forEach>
-        </table>
+        </table>   
     </body>
 </html>

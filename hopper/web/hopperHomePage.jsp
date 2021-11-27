@@ -16,6 +16,7 @@
     <nav> 
         <a href="hopperServlet?action=userlist">List Users</a>
         <a href="hopperServlet?action=hopperHomePage">Home Page</a>
+        <a href="hopperServlet?action=personsHops">User Hops</a>
     </nav>
     <body>
         <h1>Home Page</h1>
@@ -43,6 +44,13 @@
                     <td><c:out value="${hop.datetime}" /></td>
                     <td>likes:</td>
                     <td><c:out value="${hop.likes}" /></td>
+                    <td>
+                        <form action="hopperServlet" method="get">
+                            <!-- <input type='hidden' name='action' value="${hop.id}"/> -->
+                            <input type='hidden' name='action' value='like'/>
+                            <input type='submit' value='Like'/>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
