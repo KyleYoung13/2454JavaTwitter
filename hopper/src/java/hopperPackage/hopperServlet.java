@@ -1,6 +1,7 @@
 package hopperPackage;
 
 import java.io.IOException;
+import static java.lang.System.out;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -83,8 +84,8 @@ public class hopperServlet extends HttpServlet {
             response.sendRedirect("hopperServlet");
         } else if (request.getParameter("action").equalsIgnoreCase("searchUser")) {
             String id = request.getParameter("user_id");
-            
-            ArrayList<hop> hopList = hopModel.getUsersHops();
+            out.println("<p>" + id + "</p>");
+            ArrayList<hop> hopList = hopModel.getUsersHops(id);
             request.setAttribute("hopList", hopList);
              
             String url = "/personsHops.jsp";

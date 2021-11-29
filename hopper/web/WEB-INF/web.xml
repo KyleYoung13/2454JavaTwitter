@@ -6,7 +6,7 @@
 	 version="3.1">
     <servlet>
         <servlet-name>hopperServlet</servlet-name>
-        <servlet-class>hopper.hopperServlet</servlet-class>
+        <servlet-class>hopperPackage.hopperServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>hopperServlet</servlet-name>

@@ -41,7 +41,7 @@ public class hopModel {
         return hopsList;
     }
     
-    public static ArrayList<hop> getUsersHops() {
+    public static ArrayList<hop> getUsersHops(String idString) {
         // Need a hop argumen to get the ID????
         // How to use excecute query vs prepared sql???
         // is the search user in user model useless??
@@ -50,7 +50,8 @@ public class hopModel {
         try {
             Connection connection = DBConnection.getConnection();
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("select * from hop where user_id = ?");
+            ResultSet results = statement.executeQuery("select * from hop where user_id = '1'");
+            System.out.println(idString);
             while (results.next()) {
                 int id = results.getInt("id");
                 int user_id = results.getInt("user_id");
