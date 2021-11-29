@@ -16,7 +16,7 @@ public class hopModel {
 
             Statement statement = connection.createStatement();
 
-            ResultSet results = statement.executeQuery("select * from hop");
+            ResultSet results = statement.executeQuery("select * from hop ORDER BY datetime DESC");
 
             while (results.next()) {
                 int id = results.getInt("id");
@@ -42,6 +42,10 @@ public class hopModel {
     }
     
     public static ArrayList<hop> getUsersHops() {
+        // Need a hop argumen to get the ID????
+        // How to use excecute query vs prepared sql???
+        // is the search user in user model useless??
+        
         ArrayList<hop> singlePersonHops = new ArrayList<>();
         try {
             Connection connection = DBConnection.getConnection();

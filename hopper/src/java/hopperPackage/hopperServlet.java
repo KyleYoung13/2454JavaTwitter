@@ -83,17 +83,17 @@ public class hopperServlet extends HttpServlet {
             response.sendRedirect("hopperServlet");
         } else if (request.getParameter("action").equalsIgnoreCase("searchUser")) {
             String id = request.getParameter("user_id");
-            /*
+            
             ArrayList<hop> hopList = hopModel.getUsersHops();
             request.setAttribute("hopList", hopList);
-             */
+             
             String url = "/personsHops.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
             if (id == null || id.isBlank()) {
                 throw new ServletException("Blank input");
             } else {
-                User user = new User(Integer.parseInt(id), "", "");
-                UserModel.searchUser(user);
+                //User user = new User(Integer.parseInt(id), "", "");
+                //UserModel.searchUser(user);
             }
             response.sendRedirect("hopperServlet");
         } //START OF HOPPER HOME PAGE

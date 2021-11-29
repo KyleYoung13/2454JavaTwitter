@@ -88,7 +88,7 @@ public class UserModel {
         try {
             Connection connection = DBConnection.getConnection();
 
-            String preparedSQL = "select from user where id = ? ";
+            String preparedSQL = "select * from user where id = ? ";
             PreparedStatement statement = connection.prepareStatement(preparedSQL);
             // first index is 1, it's ok to cry
             statement.setInt(1, user.getId());
