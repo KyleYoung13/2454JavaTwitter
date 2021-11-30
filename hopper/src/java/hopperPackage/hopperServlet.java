@@ -83,14 +83,13 @@ public class hopperServlet extends HttpServlet {
             }
             response.sendRedirect("hopperServlet");
         } else if (request.getParameter("action").equalsIgnoreCase("searchUser")) {
-            String id = request.getParameter("user_id");
-            out.println("<p>" + id + "</p>");
+            int id = Integer.parseInt(request.getParameter("user_id"));
             ArrayList<hop> hopList = hopModel.getUsersHops(id);
             request.setAttribute("hopList", hopList);
              
             String url = "/personsHops.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
-            if (id == null || id.isBlank()) {
+            if (id == 0) {
                 throw new ServletException("Blank input");
             } else {
                 //User user = new User(Integer.parseInt(id), "", "");
