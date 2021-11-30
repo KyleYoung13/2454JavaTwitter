@@ -36,11 +36,13 @@
             </div>
         </form>
         <table>
-            <c:forEach var="hop" items="${singlePersonHops}">
-                <tr>
-                    <td>user_id:</td>
+            <tr>
+                <td>user_id:</td>
+                <td>HOP:</td>
+            </tr>
+            <c:forEach var="hop" items="${hopList}">
+                <tr>                   
                     <td><c:out value="${hop.user_id}" /></td>
-                    <td>HOP:</td>
                     <td><c:out value="${hop.content}" /></td>
                 </tr>
             </c:forEach>

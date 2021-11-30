@@ -8,15 +8,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class UserModel {
-
+    public static ArrayList<User> users = new ArrayList<>();
+    
     public static ArrayList<User> getUsers() {
-        ArrayList<User> users = new ArrayList<>();
-
         try {
+            users.clear();
             Connection connection = DBConnection.getConnection();
-
             Statement statement = connection.createStatement();
-
             ResultSet results = statement.executeQuery("select * from user");
 
             while (results.next()) {

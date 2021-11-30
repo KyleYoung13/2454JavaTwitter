@@ -1,7 +1,6 @@
 package hopperPackage;
 
 import java.io.IOException;
-import static java.lang.System.out;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = {"/hopperServlet"})
 public class hopperServlet extends HttpServlet {
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -27,17 +25,14 @@ public class hopperServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         if (request.getParameter("action") == null || request.getParameter("action").equalsIgnoreCase("userlist")) {
             ArrayList<User> users = UserModel.getUsers();
             request.setAttribute("users", users);
             String url = "/UserList.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         } else if (request.getParameter("action").equalsIgnoreCase("addUser")) {
-
             String userName = request.getParameter("username");
             String password = request.getParameter("password");
-
             if (userName == null || userName.isBlank() || password == null || password.isBlank()) {
                 throw new ServletException("Blank input");
             } else {
@@ -45,15 +40,11 @@ public class hopperServlet extends HttpServlet {
                 try {
                     //https://www.geeksforgeeks.org/sha-256-hash-in-java/
                     String hashedPassword = toHexString(getSHA(password));
-
                     User user = new User(0, userName, hashedPassword);
-
                     String result = UserModel.addUser(user);
-
                     if (!result.isEmpty()) {
                         // chekc the exception, see if username is taken, do good thing
                     }
-
                 } catch (NoSuchAlgorithmException ex) {
                     throw new ServletException("Blank input");
                 }
@@ -84,18 +75,14 @@ public class hopperServlet extends HttpServlet {
             response.sendRedirect("hopperServlet");
         } else if (request.getParameter("action").equalsIgnoreCase("searchUser")) {
             int id = Integer.parseInt(request.getParameter("user_id"));
-            ArrayList<hop> hopList = hopModel.getUsersHops(id);
-            request.setAttribute("hopList", hopList);
-             
-            String url = "/personsHops.jsp";
-            getServletContext().getRequestDispatcher(url).forward(request, response);
             if (id == 0) {
                 throw new ServletException("Blank input");
             } else {
-                //User user = new User(Integer.parseInt(id), "", "");
-                //UserModel.searchUser(user);
+                ArrayList<hop> hopList = hopModel.getUsersHops(id);
+                request.setAttribute("hopList", hopList);
+                String url = "/personsHops.jsp";
+                getServletContext().getRequestDispatcher(url).forward(request, response);
             }
-            response.sendRedirect("hopperServlet");
         } //START OF HOPPER HOME PAGE
         else if (request.getParameter("action").equalsIgnoreCase("hopperHomePage")) {
             ArrayList<hop> hopsList = hopModel.getHops();

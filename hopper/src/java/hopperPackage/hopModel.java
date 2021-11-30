@@ -12,8 +12,8 @@ public class hopModel {
     public static ArrayList<hop> hopsList = new ArrayList<>();
 
     public static ArrayList<hop> getHops() {
-        //ArrayList<hop> hopsList = new ArrayList<>();
         try {
+            hopsList.clear();
             Connection connection = DBConnection.getConnection();
 
             Statement statement = connection.createStatement();
@@ -39,44 +39,16 @@ public class hopModel {
         } catch (ClassNotFoundException ex) {
             // todo something later
         }
-
         return hopsList;
     }
 
     public static ArrayList<hop> getUsersHops(int idString) {
-        // Need a hop argumen to get the ID????
-        // How to use excecute query vs prepared sql???
-        // is the search user in user model useless??
-
         ArrayList<hop> singlePersonHops = new ArrayList<>();
         for (hop hops : hopsList) {
             if (hops.getUser_id() == idString) {
                 singlePersonHops.add(hops);
             }
         }
-        /*
-        try {       
-            Connection connection = DBConnection.getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("select * from hop where user_id = " + idString);
-            while (results.next()) {
-                int id = results.getInt("id");
-                int user_id = results.getInt("user_id");
-                String content = results.getString("content");
-                String datetime = results.getString("datetime");
-                int likes = results.getInt("likes");
-                singlePersonHops.add(new hop(id, user_id, content, datetime, likes));
-            }
-            results.close();
-            statement.close();
-            connection.close();
-             
-        } catch (SQLException ex) {
-            // todo something later
-        } catch (ClassNotFoundException ex) {
-            // todo something later
-        }
-         */
         return singlePersonHops;
     }
 
