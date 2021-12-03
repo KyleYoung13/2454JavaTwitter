@@ -8,8 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class UserModel {
+
     public static ArrayList<User> users = new ArrayList<>();
-    
+
     public static ArrayList<User> getUsers() {
         try {
             users.clear();
@@ -37,7 +38,24 @@ public class UserModel {
 
         return users;
     }
-    
+
+    public static boolean uniqueUsername(String name) {
+        for (User user : users) {
+            if (user.getUserName() == name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkForUser(String name, String pass) {
+        for (User user : users) {
+            if (user.getUserName() == name && user.getPassword() == pass) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static String addUser(User user) {
         try {

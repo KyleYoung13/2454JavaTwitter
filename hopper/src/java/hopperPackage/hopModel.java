@@ -99,4 +99,12 @@ public class hopModel {
         } catch (ClassNotFoundException ex) {
         }
     }
+
+    public static void likeHop(int idString) {
+        for (hop hops : hopsList) {
+            if (hops.getUser_id() == idString) {
+                hops.setLikes(hops.getLikes() + 1);
+            }
+        }
+    }
 }

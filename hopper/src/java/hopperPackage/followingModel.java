@@ -7,8 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class followingModel {
+    public static ArrayList<following> followList = new ArrayList<>();
     public static ArrayList<following> getFollowing() {
-        ArrayList<following> followList = new ArrayList<>();
         try {
             Connection connection = DBConnection.getConnection();
 
@@ -32,7 +32,6 @@ public class followingModel {
         } catch (ClassNotFoundException ex) {
             // todo something later
         }
-
         return followList;
     }
     

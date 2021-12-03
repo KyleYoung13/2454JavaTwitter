@@ -8,15 +8,19 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(urlPatterns = {"/hopperServlet"})
 public class hopperServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -30,6 +34,17 @@ public class hopperServlet extends HttpServlet {
             request.setAttribute("users", users);
             String url = "/UserList.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
+        } else if (request.getParameter("action").equalsIgnoreCase("loginUser")) {
+            String userName = request.getParameter("username");
+            String password = request.getParameter("password");
+            HttpSession session = request.getSession();
+            session.setAttribute(userName, request);
+            
+            Cookie cookie = new Cookie("usernameCookie", userName);
+            response.addCookie(cookie);
+
+            
+            response.sendRedirect("hopperServlet");
         } else if (request.getParameter("action").equalsIgnoreCase("addUser")) {
             String userName = request.getParameter("username");
             String password = request.getParameter("password");
@@ -41,10 +56,12 @@ public class hopperServlet extends HttpServlet {
                     //https://www.geeksforgeeks.org/sha-256-hash-in-java/
                     String hashedPassword = toHexString(getSHA(password));
                     User user = new User(0, userName, hashedPassword);
-                    String result = UserModel.addUser(user);
-                    if (!result.isEmpty()) {
-                        // chekc the exception, see if username is taken, do good thing
+                    if (UserModel.uniqueUsername(userName)) {
+                        throw new ServletException("Blank input");
+                    } else {
+                        UserModel.addUser(user);
                     }
+
                 } catch (NoSuchAlgorithmException ex) {
                     throw new ServletException("Blank input");
                 }
