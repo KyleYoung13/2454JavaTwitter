@@ -41,7 +41,7 @@ public class UserModel {
 
     public static boolean uniqueUsername(String name) {
         for (User user : users) {
-            if (user.getUserName() == name) {
+            if (user.getUserName().equals(name)) {
                 return true;
             }
         }
@@ -50,7 +50,7 @@ public class UserModel {
 
     public static boolean checkForUser(String name, String pass) {
         for (User user : users) {
-            if (user.getUserName() == name && user.getPassword() == pass) {
+            if (user.getUserName().equals(name) && user.getPassword().equals(pass)) {
                 return true;
             }
         }

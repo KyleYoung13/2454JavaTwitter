@@ -12,15 +12,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home Page</title>
+        <link href ="resources/css.css" type ="text/css" rel ="stylesheet"/>
     </head>
+    <img src ="images/beer-bubbles.jpg" alt ="hopper_header" /> 
     <nav> 
         <a href="hopperServlet?action=userlist">List Users</a>
         <a href="hopperServlet?action=hopperHomePage">Home Page</a>
         <a href="hopperServlet?action=personsHops">User Hops</a>
     </nav>
     <body>
-        <h1>Home Page</h1>
-        <h2>Post Hop</h2>
+        <div class ="h2">
+            <h1>Home Page</h1></div>
+        <div class ="h2">
+        <h2>Post Hop</h2></div>
         <form action="hopperServlet" method="post">
             <div>
                 <label>Type Here</label>

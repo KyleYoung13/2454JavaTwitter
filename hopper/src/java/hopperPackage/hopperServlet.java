@@ -44,7 +44,7 @@ public class hopperServlet extends HttpServlet {
             response.addCookie(cookie);
 
             
-            response.sendRedirect("hopperServlet");
+            response.sendRedirect("hopperServlet?action=hopperHomePage");
         } else if (request.getParameter("action").equalsIgnoreCase("addUser")) {
             String userName = request.getParameter("username");
             String password = request.getParameter("password");
@@ -66,7 +66,7 @@ public class hopperServlet extends HttpServlet {
                     throw new ServletException("Blank input");
                 }
             }
-            response.sendRedirect("hopperServlet");
+            response.sendRedirect("hopperServlet?action=hopperHomePage");
         } else if (request.getParameter("action").equalsIgnoreCase("updateUser")) {
 
             String id = request.getParameter("id");
