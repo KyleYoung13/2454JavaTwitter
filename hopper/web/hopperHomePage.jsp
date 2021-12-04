@@ -14,7 +14,7 @@
         <title>Home Page</title>
         <link href ="resources/css.css" type ="text/css" rel ="stylesheet"/>
     </head>
-    <img src ="images/beer-bubbles.jpg" alt ="hopper_header" /> 
+    <a href = "hopperHomePage.jsp"><img src ="images/beer-bubbles.jpg" alt ="hopper_header" /> </a>
     <nav> 
         <a href="hopperServlet?action=userlist">List Users</a>
         <a href="hopperServlet?action=hopperHomePage">Home Page</a>
