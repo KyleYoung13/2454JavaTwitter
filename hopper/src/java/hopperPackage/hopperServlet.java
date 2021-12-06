@@ -37,13 +37,16 @@ public class hopperServlet extends HttpServlet {
         } else if (request.getParameter("action").equalsIgnoreCase("loginUser")) {
             String userName = request.getParameter("username");
             String password = request.getParameter("password");
-            HttpSession session = request.getSession();
-            session.setAttribute(userName, request);
-            
-            Cookie cookie = new Cookie("usernameCookie", userName);
-            response.addCookie(cookie);
 
-            
+            if (UserModel.checkForUser(userName, password)) {
+                throw new ServletException("Blank input");
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute(userName, request);
+                Cookie cookie = new Cookie("usernameCookie", userName);
+                response.addCookie(cookie);
+            }
+
             response.sendRedirect("hopperServlet?action=hopperHomePage");
         } else if (request.getParameter("action").equalsIgnoreCase("addUser")) {
             String userName = request.getParameter("username");
@@ -106,6 +109,17 @@ public class hopperServlet extends HttpServlet {
             request.setAttribute("hopsList", hopsList);
             String url = "/hopperHomePage.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
+        } else if (request.getParameter("action").equalsIgnoreCase("addHop")) {
+            //https://stackoverflow.com/questions/22804409/get-cookie-value-in-java/46121394
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("usernameCookie")) {
+                        
+                    }
+                }
+            }
+
         } else if (request.getParameter("action").equalsIgnoreCase("like")) {
 
             String id = request.getParameter("id");
