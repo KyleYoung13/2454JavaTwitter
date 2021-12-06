@@ -57,6 +57,16 @@ public class UserModel {
         return false;
     }
 
+    public static int getIDfromUsername(String username) {
+        int id = 0;
+        for (User user : users) {
+            if (user.getUserName().equals(username)) {
+                id = user.getId();
+            }
+        }
+        return id;
+    }
+
     public static String addUser(User user) {
         try {
             Connection connection = DBConnection.getConnection();

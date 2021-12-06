@@ -111,11 +111,13 @@ public class hopperServlet extends HttpServlet {
             getServletContext().getRequestDispatcher(url).forward(request, response);
         } else if (request.getParameter("action").equalsIgnoreCase("addHop")) {
             //https://stackoverflow.com/questions/22804409/get-cookie-value-in-java/46121394
+            
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("usernameCookie")) {
-                        
+                        String username = cookie.getName();
+                        int id = UserModel.getIDfromUsername(username);
                     }
                 }
             }
