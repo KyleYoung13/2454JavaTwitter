@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import jdk.internal.util.StaticProperty;
 
 @WebServlet(urlPatterns = {"/hopperServlet"})
 public class hopperServlet extends HttpServlet {
@@ -110,18 +111,21 @@ public class hopperServlet extends HttpServlet {
             String url = "/hopperHomePage.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         } else if (request.getParameter("action").equalsIgnoreCase("addHop")) {
+            String content = request.getParameter("content");
+            int user_id = 0;
             //https://stackoverflow.com/questions/22804409/get-cookie-value-in-java/46121394
-            
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("usernameCookie")) {
-                        String username = cookie.getName();
-                        int id = UserModel.getIDfromUsername(username);
+                    String username = cookie.getValue();
+                    if (UserModel.uniqueUsername(username)) {
+                        user_id = UserModel.getIDfromUsername(username);
                     }
                 }
+                hop hops = new hop(0, user_id, content, "", 0);
+                hopModel.addHop(hops);
             }
-
+            response.sendRedirect("hopperServlet?action=hopperHomePage");
         } else if (request.getParameter("action").equalsIgnoreCase("like")) {
 
             String id = request.getParameter("id");

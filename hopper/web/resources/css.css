@@ -7,6 +7,10 @@ and open the template in the editor.
     Created on : Nov 27, 2021, 11:01:27 AM
     Author     : andre
 */
+.banner{
+    width: 100%;
+    height: auto;
+}
 
 .myGrid {
     width: 1366px;

@@ -1,5 +1,6 @@
 package hopperPackage;
 
+import static hopperPackage.hopModel.hopsList;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,7 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class followingModel {
+
     public static ArrayList<following> followList = new ArrayList<>();
+
     public static ArrayList<following> getFollowing() {
         try {
             Connection connection = DBConnection.getConnection();
@@ -34,5 +37,20 @@ public class followingModel {
         }
         return followList;
     }
-    
+
+    public static ArrayList<hop> getFollowHops(int userId) {
+        ArrayList<hop> followHops = new ArrayList<>();
+        for (hop hops : hopsList) {
+            if (hops.getUser_id() == userId) {
+                followHops.add(hops);
+                for (following fol : followList) {
+                    if (hops.getUser_id() == fol.getFollow_user_id()) {
+                        followHops.add(hops);
+                    }
+                }
+            }
+        }
+        return followHops;
+    }
+
 }

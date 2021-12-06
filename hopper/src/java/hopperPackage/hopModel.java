@@ -51,14 +51,26 @@ public class hopModel {
         }
         return singlePersonHops;
     }
+    
+    public static ArrayList<hop> getFollowHops(int userId) {
+        ArrayList<hop> followHops = new ArrayList<>();
+        for (hop hops : hopsList) {
+            if (hops.getUser_id() == userId) {
+                followHops.add(hops);
+            }
+        }
+        return followHops;
+    }
 
     public static String addHop(hop hop) {
         try {
             Connection connection = DBConnection.getConnection();
-            String preparedSQL = "insert into hop (content) "
-                    + " values ( ? )";
+            String preparedSQL = "insert into hop (user_id, content, likes) "
+                    + " values ( ?, ?, ? )";
             PreparedStatement statement = connection.prepareStatement(preparedSQL);
-            statement.setString(1, hop.getContent());
+            statement.setInt(1, hop.getUser_id());
+            statement.setString(2, hop.getContent());
+            statement.setInt(3, hop.getLikes());
             statement.execute();
         } catch (SQLException ex) {
             return ex.toString();
