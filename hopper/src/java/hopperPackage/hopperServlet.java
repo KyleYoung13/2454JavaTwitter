@@ -102,20 +102,21 @@ public class hopperServlet extends HttpServlet {
             }
         } //START OF HOPPER HOME PAGE
         else if (request.getParameter("action").equalsIgnoreCase("hopperHomePage")) {
-            /*ArrayList<hop> hopsList = hopModel.getHops();
-            request.setAttribute("hopsList", hopsList);
-             */
+            //ArrayList<hop> hopsList = hopModel.getHops();
+            //request.setAttribute("hopsList", hopsList);
+             
             int user_id = 0;
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     String username = cookie.getValue();
-                    if (UserModel.uniqueUsername(username)) {
+                    if (UserModel.uniqueUsername(username)) {  
                         user_id = UserModel.getIDfromUsername(username);
                     }
                 }
             }
-            ArrayList<hop> hopsList = followingModel.getFollowHops(user_id);
+            ArrayList<hop> hopsList = hopModel.getFollowHops(user_id);
+            
             request.setAttribute("hopsList", hopsList);
             String url = "/hopperHomePage.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);

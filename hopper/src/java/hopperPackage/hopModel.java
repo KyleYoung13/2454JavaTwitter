@@ -1,5 +1,6 @@
 package hopperPackage;
 
+import static hopperPackage.followingModel.followList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,6 +51,22 @@ public class hopModel {
             }
         }
         return singlePersonHops;
+    }
+    
+    public static ArrayList<hop> getFollowHops(int userId) {
+        getHops();
+        ArrayList<hop> followHops = new ArrayList<>();
+        for (hop hops : hopsList) {
+            if (hops.getUser_id() == userId) {
+                followHops.add(hops);
+                for (following fol : followList) {
+                    if (hops.getUser_id() == fol.getFollow_user_id()) {
+                        followHops.add(hops);
+                    }
+                }
+            }
+        }
+        return followHops;
     }
     
     

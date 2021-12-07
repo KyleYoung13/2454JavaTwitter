@@ -37,21 +37,6 @@ public class followingModel {
         }
         return followList;
     }
-
-    public static ArrayList<hop> getFollowHops(int userId) {
-        ArrayList<hop> followHops = new ArrayList<>();
-        for (hop hops : hopsList) {
-            if (hops.getUser_id() == userId) {
-                followHops.add(hops);
-                for (following fol : followList) {
-                    if (hops.getUser_id() == fol.getFollow_user_id()) {
-                        followHops.add(hops);
-                    }
-                }
-            }
-        }
-        return followHops;
-    }
     
     public static String addFollow(following follow) {
         try {
