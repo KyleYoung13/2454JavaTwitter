@@ -35,6 +35,10 @@
         </form>
         <form action="hopperServlet" method="post">
             <div>
+                <label>ID to follow</label>
+                <input type="text" name="follow_user_id"/></br> 
+            </div>
+            <div>
                 <input type='hidden' name='action' value='followUser'/>
                 <input type='submit' value='Follow'/></br>
             </div>

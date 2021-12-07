@@ -106,9 +106,9 @@ public class hopModel {
 
     public static void likeHop(String content) {
         for (hop hops : hopsList) {
-            if (hops.getContent().equals(content)) {
+            //if (hops.getContent().equals(content)) {
                 hops.setLikes(hops.getLikes() + 1);
-            }
+            //}
         }
     }
 }

@@ -39,14 +39,10 @@ public class hopperServlet extends HttpServlet {
             String userName = request.getParameter("username");
             String password = request.getParameter("password");
 
-            if (UserModel.checkForUser(userName)) {
-                throw new ServletException("Blank input");
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute(userName, request);
-                Cookie cookie = new Cookie("usernameCookie", userName);
-                response.addCookie(cookie);
-            }
+            HttpSession session = request.getSession();
+            session.setAttribute(userName, request);
+            Cookie cookie = new Cookie("usernameCookie", userName);
+            response.addCookie(cookie);
 
             response.sendRedirect("hopperServlet?action=hopperHomePage");
         } else if (request.getParameter("action").equalsIgnoreCase("addUser")) {
@@ -106,7 +102,20 @@ public class hopperServlet extends HttpServlet {
             }
         } //START OF HOPPER HOME PAGE
         else if (request.getParameter("action").equalsIgnoreCase("hopperHomePage")) {
-            ArrayList<hop> hopsList = hopModel.getHops();
+            /*ArrayList<hop> hopsList = hopModel.getHops();
+            request.setAttribute("hopsList", hopsList);
+             */
+            int user_id = 0;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    String username = cookie.getValue();
+                    if (UserModel.uniqueUsername(username)) {
+                        user_id = UserModel.getIDfromUsername(username);
+                    }
+                }
+            }
+            ArrayList<hop> hopsList = followingModel.getFollowHops(user_id);
             request.setAttribute("hopsList", hopsList);
             String url = "/hopperHomePage.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
@@ -137,8 +146,8 @@ public class hopperServlet extends HttpServlet {
         else if (request.getParameter("action").equalsIgnoreCase("personsHops")) {
             String url = "/personsHops.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
-        } else if (request.getParameter("action").equalsIgnoreCase("follow")) {
-            int searched_id = Integer.parseInt(request.getParameter("user_id"));
+        } else if (request.getParameter("action").equalsIgnoreCase("followUser")) {
+            int searched_id = Integer.parseInt(request.getParameter("follow_user_id"));
             int user_id = 0;
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
@@ -151,7 +160,7 @@ public class hopperServlet extends HttpServlet {
             }
             following follow = new following(user_id, searched_id);
             followingModel.addFollow(follow);
-            
+
             response.sendRedirect("hopperServlet?action=personsHops");
         }
     }

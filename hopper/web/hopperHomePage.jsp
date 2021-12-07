@@ -50,8 +50,7 @@
                     <td><c:out value="${hop.likes}" /></td>
                     <td>
                         <form action="hopperServlet" method="get">
-                            <!-- <input type='hidden' name='action' value="${hop.id}"/> -->
-                            <input type='hidden' name='action' value='like'/>
+                            <input type='hidden' name='action' value='like' id="${hop.id}"/>
                             <input type='submit' value='Like'/>
                         </form>
                     </td>
