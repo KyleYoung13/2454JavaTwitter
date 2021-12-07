@@ -48,9 +48,9 @@ public class UserModel {
         return false;
     }
 
-    public static boolean checkForUser(String name, String pass) {
+    public static boolean checkForUser(String name) {
         for (User user : users) {
-            if (user.getUserName().equals(name) && user.getPassword().equals(pass)) {
+            if (user.getUserName().equals(name)) {
                 return true;
             }
         }

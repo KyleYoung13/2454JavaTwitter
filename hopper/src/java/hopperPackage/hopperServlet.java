@@ -39,7 +39,7 @@ public class hopperServlet extends HttpServlet {
             String userName = request.getParameter("username");
             String password = request.getParameter("password");
 
-            if (UserModel.checkForUser(userName, password)) {
+            if (UserModel.checkForUser(userName)) {
                 throw new ServletException("Blank input");
             } else {
                 HttpSession session = request.getSession();
@@ -128,19 +128,31 @@ public class hopperServlet extends HttpServlet {
             response.sendRedirect("hopperServlet?action=hopperHomePage");
         } else if (request.getParameter("action").equalsIgnoreCase("like")) {
 
-            String id = request.getParameter("id");
+            String content = request.getParameter("content");
 
-            if (id == null || id.isBlank()) {
-                throw new ServletException("Blank input");
-            } else {
-                // hop hop = new hop(Integer.parseInt(id), userName, hashedPassword);
-                // hopModel.addLike(hop);
-            }
-            response.sendRedirect("hopperServlet");
+            hopModel.likeHop(content);
+
+            response.sendRedirect("hopperServlet?action=hopperHomePage");
         } //START OF HOPPER USER SEARCH PAGE
         else if (request.getParameter("action").equalsIgnoreCase("personsHops")) {
             String url = "/personsHops.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
+        } else if (request.getParameter("action").equalsIgnoreCase("follow")) {
+            int searched_id = Integer.parseInt(request.getParameter("user_id"));
+            int user_id = 0;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    String username = cookie.getValue();
+                    if (UserModel.uniqueUsername(username)) {
+                        user_id = UserModel.getIDfromUsername(username);
+                    }
+                }
+            }
+            following follow = new following(user_id, searched_id);
+            followingModel.addFollow(follow);
+            
+            response.sendRedirect("hopperServlet?action=personsHops");
         }
     }
 

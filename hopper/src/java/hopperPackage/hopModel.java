@@ -52,15 +52,7 @@ public class hopModel {
         return singlePersonHops;
     }
     
-    public static ArrayList<hop> getFollowHops(int userId) {
-        ArrayList<hop> followHops = new ArrayList<>();
-        for (hop hops : hopsList) {
-            if (hops.getUser_id() == userId) {
-                followHops.add(hops);
-            }
-        }
-        return followHops;
-    }
+    
 
     public static String addHop(hop hop) {
         try {
@@ -112,9 +104,9 @@ public class hopModel {
         }
     }
 
-    public static void likeHop(int idString) {
+    public static void likeHop(String content) {
         for (hop hops : hopsList) {
-            if (hops.getUser_id() == idString) {
+            if (hops.getContent().equals(content)) {
                 hops.setLikes(hops.getLikes() + 1);
             }
         }

@@ -2,6 +2,7 @@ package hopperPackage;
 
 import static hopperPackage.hopModel.hopsList;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -51,6 +52,43 @@ public class followingModel {
             }
         }
         return followHops;
+    }
+    
+    public static String addFollow(following follow) {
+        try {
+            Connection connection = DBConnection.getConnection();
+
+            String preparedSQL = "insert into following (user_id, follow_user_id) "
+                    + " values ( ?, ? )";
+            PreparedStatement statement = connection.prepareStatement(preparedSQL);
+            // first index is 1, it's ok to cry
+            statement.setInt(1, follow.getUser_id());
+            statement.setInt(2, follow.getFollow_user_id());
+
+            statement.execute();
+
+        } catch (SQLException ex) {
+            return ex.toString();
+        } catch (ClassNotFoundException ex) {
+            // todo something later
+        }
+
+        return "";
+    }
+    
+    public static void deleteFollow(following follow) {
+        try {
+            Connection connection = DBConnection.getConnection();
+
+            String preparedSQL = "delete from following where user_id = ? ";
+            PreparedStatement statement = connection.prepareStatement(preparedSQL);
+            // need to have SQL delete where user_id and followingID = ? ?
+            statement.setInt(1, follow.getUser_id());
+            statement.execute();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } catch (ClassNotFoundException ex) {
+        }
     }
 
 }
