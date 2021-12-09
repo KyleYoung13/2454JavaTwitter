@@ -44,6 +44,7 @@ public class hopModel {
     }
 
     public static ArrayList<hop> getUsersHops(int idString) {
+        //getHops();
         ArrayList<hop> singlePersonHops = new ArrayList<>();
         for (hop hops : hopsList) {
             if (hops.getUser_id() == idString) {
@@ -54,7 +55,7 @@ public class hopModel {
     }
     
     public static ArrayList<hop> getFollowHops(int userId) {
-        getHops();
+        //getHops();
         ArrayList<hop> followHops = new ArrayList<>();
         for (hop hops : hopsList) {
             if (hops.getUser_id() == userId) {

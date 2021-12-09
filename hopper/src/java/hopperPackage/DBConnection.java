@@ -17,5 +17,4 @@ public class DBConnection {
                 dbURL, username, password);
         return connection;
     }
-
 }
