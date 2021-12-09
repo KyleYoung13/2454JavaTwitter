@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -10,36 +10,40 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href ="resources/css.css" type ="text/css" rel ="stylesheet"/>
-        
+
     </head>
     <body>
-        <a href = "hopperHomePage.jsp"><img src ="images/beer-bubbles.jpg" alt ="hopper_header" /> </a>
-        <div class = h2>
-        <h2>Create User</h2></div>
+
+        <div class = primary_header>
+            <a href = "hopperHomePage.jsp"><img src ="images/beer-bubbles.jpg" alt ="hopper_header" /> </a></div>
+        <div class = secondary_header>
+            <h2>Create User</h2></div>
         <form action="hopperServlet" method="post">
-            <div>
+            <div class = secondary_header>
                 <label>Username</label>
                 <input type="text" name="username"/></br> 
                 <label>Password</label>
                 <input type="password" name="password"/></br> 
             </div>
-            <div>
+            <div class = secondary_header>
                 <input type='hidden' name='action' value='addUser'/>
                 <input type='submit' value='Create User'/></br>
             </div>
         </form>
-        <h2>Login</h2>
-        <form action="hopperServlet" method="post">
-            <div>
-                <label>Username</label>
-                <input type="text" name="username"/></br> 
-                <label>Password</label>
-                <input type="password" name="password"/></br> 
-            </div>
-            <div>
-                <input type='hidden' name='action' value='loginUser'/>
-                <input type='submit' value='Login'/></br>
-            </div>
-        </form>
+        <div class = secondary_header>
+            <h2>Login</h2>
+            <form action="hopperServlet" method="post">
+                <div class = secondary_header>
+                    <label>Username</label>
+                    <input type="text" name="username"/></br> 
+                    <label>Password</label>
+                    <input type="password" name="password"/></br> 
+                </div>
+                <div class = secondary_header>
+                    <input type='hidden' name='action' value='loginUser'/>
+                    <div class ="buttons">
+                        <input type='submit' value='Login'/></br></div>
+                </div>
+            </form>
     </body>
 </html>
