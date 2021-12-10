@@ -13,7 +13,8 @@
         <title>List of hops Page</title>
         <link href ="resources/css.css" type ="text/css" rel ="stylesheet"/>
     </head>
-        <a href = "hopperHomePage.jsp"><img src ="images/beer-bubbles.jpg" alt ="hopper_header" /> </a>
+        <div class = primary_header>
+            <a href = "hopperHomePage.jsp"><img src="images/beer-bubbless.jpg" alt ="hopper_header" /> </a></div>
     <nav> 
         <a href="hopperServlet?action=userlist">List Users</a>
         <a href="hopperServlet?action=hopperHomePage">Home Page</a>

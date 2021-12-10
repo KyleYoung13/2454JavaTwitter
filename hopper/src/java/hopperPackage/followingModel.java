@@ -13,6 +13,7 @@ public class followingModel {
     public static ArrayList<following> followList = new ArrayList<>();
     public static ArrayList<following> getFollowing() {
         try {
+            followList.clear();
             Connection connection = DBConnection.getConnection();
 
             Statement statement = connection.createStatement();

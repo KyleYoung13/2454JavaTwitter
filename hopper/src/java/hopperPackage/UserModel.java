@@ -40,6 +40,7 @@ public class UserModel {
     }
 
     public static boolean uniqueUsername(String name) {
+        UserModel.getUsers();
         for (User user : users) {
             if (user.getUserName().equals(name)) {
                 return true;

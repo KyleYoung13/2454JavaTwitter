@@ -55,7 +55,7 @@ public class hopModel {
     }
     
     public static ArrayList<hop> getFollowHops(int userId) {
-       // getHops();
+        getHops();
         followingModel.getFollowing();
         ArrayList<hop> followHops = new ArrayList<>();
         for (hop hops : hopsList) {
