@@ -27,26 +27,26 @@
         <div class ="secondary_header">
             <h2>Post Hop</h2></div>
         <form action="hopperServlet" method="post">
-            <div>
+            <div class = secondary_header>
                 <label>Type Here</label>
                 <input type="text" name="content"/></br> 
             </div>
-            <div>
+            <div class = secondary_header>
                 <input type='hidden' name='action' value='addHop'/>
                 <input type='submit' value='Post'/></br>
             </div>
         </form>
         <form action="hopperServlet" method="post" enctype="multipart/form-data">
-            <div>
+            <div class = secondary_header>
                 <input type="file" accept="image/*" name="file">
             </div>
-            <div>
+            <div class = secondary_header>
                 <label>&nbsp;</label>
                 <input type='hidden' name='action' value='postHopImage'/>
                 <input type="submit" value="Post Image"><br>
             </div>
         </form>
-        <table>
+        <table class = secondary_header>
             <c:forEach var="hop" items="${hopsList}">
                 <tr>
                     <td>hop_id:</td>
@@ -63,11 +63,11 @@
                     <td><c:out value="${hop.likes}" /></td>
                     <td>
                         <form action="hopperServlet" method="post">
-                            <div>
+                            <div class = secondary_header>
                                 <label>Enter Hop ID</label>
                                 <input type="text" name="like_id"/></br> 
                             </div>
-                            <div>
+                            <div class = secondary_header>
                                 <input type='hidden' name='action' value='like'/>
                                 <input type='submit' value='Like Hop'/></br>
                             </div>

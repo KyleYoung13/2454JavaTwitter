@@ -169,6 +169,7 @@ public class hopperServlet extends HttpServlet {
         }
         else if (request.getParameter("action").equalsIgnoreCase("postHopImage")) {
             response.sendRedirect("hopperServlet?action=hopperHomePage");
+           
         }
     }
 
