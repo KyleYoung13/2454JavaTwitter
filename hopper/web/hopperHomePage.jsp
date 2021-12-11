@@ -16,7 +16,7 @@
     </head>
     <div class = primary_header>
         <a href = "hopperHomePage.jsp"><img src="images/beer-bubbless.jpg" alt ="hopper_header" /> </a></div>
-    <nav> 
+    <nav class = secondary_header> 
         <a href="hopperServlet?action=userlist">List Users</a>
         <a href="hopperServlet?action=hopperHomePage">Home Page</a>
         <a href="hopperServlet?action=personsHops">User Hops</a>
@@ -36,7 +36,7 @@
                 <input type='submit' value='Post'/></br>
             </div>
         </form>
-        <form action="hopperServlet" method="post" enctype="multipart/form-data">
+        <form action="hopperServlet?action=uploadImage" method="post" enctype="multipart/form-data">
             <div class = secondary_header>
                 <input type="file" accept="image/*" name="file">
             </div>
@@ -46,7 +46,7 @@
                 <input type="submit" value="Post Image"><br>
             </div>
         </form>
-        <table class = secondary_header>
+        <table class = left_article>
             <c:forEach var="hop" items="${hopsList}">
                 <tr>
                     <td>hop_id:</td>

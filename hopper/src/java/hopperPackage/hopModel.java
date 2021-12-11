@@ -1,11 +1,14 @@
 package hopperPackage;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 public class hopModel {
 
@@ -41,6 +44,8 @@ public class hopModel {
         }
         return hopsList;
     }
+    
+    
 
     public static ArrayList<hop> getUsersHops(int idString) {
         getHops();
@@ -70,6 +75,7 @@ public class hopModel {
         }
         return followHops;
     }
+    
 
     public static String addHop(hop hop) {
         try {

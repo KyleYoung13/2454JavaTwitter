@@ -14,7 +14,7 @@
     </head>
     <div class = primary_header>
             <a href = "hopperHomePage.jsp"><img src="images/beer-bubbless.jpg" alt ="hopper_header" /> </a></div>
-    <nav> 
+    <nav class = secondary_header> 
         <a href="hopperServlet?action=userlist">List Users</a>
         <a href="hopperServlet?action=hopperHomePage">Home Page</a>
         <a href="hopperServlet?action=personsHops">User Hops</a>
