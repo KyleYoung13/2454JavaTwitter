@@ -36,6 +36,16 @@
                 <input type='submit' value='Post'/></br>
             </div>
         </form>
+        <form action="hopperServlet" method="post" enctype="multipart/form-data">
+            <div>
+                <input type="file" accept="image/*" name="file">
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <input type='hidden' name='action' value='postHopImage'/>
+                <input type="submit" value="Post Image"><br>
+            </div>
+        </form>
         <table>
             <c:forEach var="hop" items="${hopsList}">
                 <tr>

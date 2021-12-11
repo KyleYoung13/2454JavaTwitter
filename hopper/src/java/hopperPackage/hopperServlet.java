@@ -167,6 +167,9 @@ public class hopperServlet extends HttpServlet {
 
             response.sendRedirect("hopperServlet?action=personsHops");
         }
+        else if (request.getParameter("action").equalsIgnoreCase("postHopImage")) {
+            response.sendRedirect("hopperServlet?action=hopperHomePage");
+        }
     }
 
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
