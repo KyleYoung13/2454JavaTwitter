@@ -14,39 +14,23 @@
         
 }
 
-.buttons {
-  background-image: url('images/beer-mug-icon.png'); 
+.buttons { 
   cursor: pointer;
   width: 200px;
   height: 300px;
   border: none;
 }
 
-.columns {
-	width: 25%;
-	float: left;
-	
-        font-size: 30px;
-	color: #000435;
-	line-height: 24px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	text-align: justify;
-	margin-top: 15px;
-	margin-bottom: 15px;
-	padding-left: 0px;
-	padding-right: 0px;
-	margin-left: 0px;
-	margin-right: 0px;
-}
 .primary_header {
-	width: 100%;
+	width: 87.8%;
         background-color: #d7cfb8;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	clear: left;
         border-bottom: 4px solid #be8f02;
-        padding-left: 100px;
+        height: 100%;
+        padding-left: 300px;
+        padding-right: 10px;
 }
 .secondary_header {
 	width: 100%;
