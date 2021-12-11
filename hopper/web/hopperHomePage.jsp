@@ -15,7 +15,7 @@
         <link href ="resources/css.css" type ="text/css" rel ="stylesheet"/>
     </head>
     <div class = primary_header>
-            <a href = "hopperHomePage.jsp"><img src="images/beer-bubbless.jpg" alt ="hopper_header" /> </a></div>
+        <a href = "hopperHomePage.jsp"><img src="images/beer-bubbless.jpg" alt ="hopper_header" /> </a></div>
     <nav> 
         <a href="hopperServlet?action=userlist">List Users</a>
         <a href="hopperServlet?action=hopperHomePage">Home Page</a>
@@ -25,7 +25,7 @@
         <div class ="secondary_header">
             <h1>Home Page</h1></div>
         <div class ="secondary_header">
-        <h2>Post Hop</h2></div>
+            <h2>Post Hop</h2></div>
         <form action="hopperServlet" method="post">
             <div>
                 <label>Type Here</label>
@@ -39,6 +39,8 @@
         <table>
             <c:forEach var="hop" items="${hopsList}">
                 <tr>
+                    <td>hop_id:</td>
+                    <td><c:out value="${hop.id}" /></td>
                     <td>user_id:</td>
                     <td><c:out value="${hop.user_id}" /></td>
                     <td>HOP:</td>
@@ -50,9 +52,15 @@
                     <td>likes:</td>
                     <td><c:out value="${hop.likes}" /></td>
                     <td>
-                        <form action="hopperServlet" method="get">
-                            <input type='hidden' name='action' value='like' id="${hop.id}"/>
-                            <input type='submit' value='Like'/>
+                        <form action="hopperServlet" method="post">
+                            <div>
+                                <label>Enter Hop ID</label>
+                                <input type="text" name="like_id"/></br> 
+                            </div>
+                            <div>
+                                <input type='hidden' name='action' value='like'/>
+                                <input type='submit' value='Like Hop'/></br>
+                            </div>
                         </form>
                     </td>
                 </tr>

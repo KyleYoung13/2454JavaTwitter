@@ -1,5 +1,6 @@
 package hopperPackage;
 
+import static hopperPackage.hopModel.getHops;
 import static hopperPackage.hopModel.hopsList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,6 +39,7 @@ public class followingModel {
         }
         return followList;
     }
+    
     
     public static String addFollow(following follow) {
         try {

@@ -38,11 +38,14 @@ public class hopperServlet extends HttpServlet {
         } else if (request.getParameter("action").equalsIgnoreCase("loginUser")) {
             String userName = request.getParameter("username");
             String password = request.getParameter("password");
-
-            HttpSession session = request.getSession();
-            session.setAttribute(userName, request);
-            Cookie cookie = new Cookie("usernameCookie", userName);
-            response.addCookie(cookie);
+            if (UserModel.uniqueUsername(userName)) {
+                HttpSession session = request.getSession();
+                session.setAttribute(userName, request);
+                Cookie cookie = new Cookie("usernameCookie", userName);
+                response.addCookie(cookie);
+            } else {
+                throw new ServletException("Blank input");
+            }
 
             response.sendRedirect("hopperServlet?action=hopperHomePage");
         } else if (request.getParameter("action").equalsIgnoreCase("addUser")) {
@@ -102,22 +105,22 @@ public class hopperServlet extends HttpServlet {
             }
         } //START OF HOPPER HOME PAGE
         else if (request.getParameter("action").equalsIgnoreCase("hopperHomePage")) {
-           // ArrayList<hop> hopsList = hopModel.getHops();
+            //ArrayList<hop> hopsList = hopModel.getHops();
             //request.setAttribute("hopsList", hopsList);
-             
+
             int user_id = 0;
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     String username = cookie.getValue();
-                    if (UserModel.uniqueUsername(username)) {  
+                    if (UserModel.uniqueUsername(username)) {
                         user_id = UserModel.getIDfromUsername(username);
                     }
                 }
             }
             ArrayList<hop> hopsList = hopModel.getFollowHops(user_id);
             request.setAttribute("hopsList", hopsList);
-            
+
             String url = "/hopperHomePage.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         } else if (request.getParameter("action").equalsIgnoreCase("addHop")) {
@@ -138,9 +141,9 @@ public class hopperServlet extends HttpServlet {
             response.sendRedirect("hopperServlet?action=hopperHomePage");
         } else if (request.getParameter("action").equalsIgnoreCase("like")) {
 
-            String content = request.getParameter("content");
-
-            hopModel.likeHop(content);
+            int like_id = Integer.parseInt(request.getParameter("like_id"));
+            hop hop = hopModel.hopFromID(like_id);
+            hopModel.likeHop(hop);
 
             response.sendRedirect("hopperServlet?action=hopperHomePage");
         } //START OF HOPPER USER SEARCH PAGE

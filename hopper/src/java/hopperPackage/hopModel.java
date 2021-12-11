@@ -1,6 +1,5 @@
 package hopperPackage;
 
-import static hopperPackage.followingModel.followList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,7 +43,7 @@ public class hopModel {
     }
 
     public static ArrayList<hop> getUsersHops(int idString) {
-        //getHops();
+        getHops();
         ArrayList<hop> singlePersonHops = new ArrayList<>();
         for (hop hops : hopsList) {
             if (hops.getUser_id() == idString) {
@@ -53,15 +52,16 @@ public class hopModel {
         }
         return singlePersonHops;
     }
-    
+
     public static ArrayList<hop> getFollowHops(int userId) {
         getHops();
-        followingModel.getFollowing();
         ArrayList<hop> followHops = new ArrayList<>();
         for (hop hops : hopsList) {
             if (hops.getUser_id() == userId) {
                 followHops.add(hops);
-                for (following fol : followList) {
+            }
+            for (following fol : followingModel.getFollowing()) {
+                if (userId == fol.getUser_id()) {
                     if (hops.getUser_id() == fol.getFollow_user_id()) {
                         followHops.add(hops);
                     }
@@ -70,8 +70,6 @@ public class hopModel {
         }
         return followHops;
     }
-    
-    
 
     public static String addHop(hop hop) {
         try {
@@ -106,28 +104,34 @@ public class hopModel {
         }
     }
 
-    public static void addLike(hop hop) {
-        //TODO 
-        //UPDATE LIKE COUNT BY ONE
+    public static hop hopFromID(int like_id) {
+        getHops();
+        hop newHop = new hop();
+        for (hop hops : hopsList) {
+            if (hops.getId() == like_id) {
+                newHop = hops;
+            }
+        }
+        return newHop;
+    }
+
+    public static void likeHop(hop hop) {
         try {
             Connection connection = DBConnection.getConnection();
-            String preparedSQL = "update hop set likes "
-                    + "where id = ?";
+
+            String preparedSQL = "update hop set likes = ? "
+                    + " where id = ? ";
             PreparedStatement statement = connection.prepareStatement(preparedSQL);
             // first index is 1, it's ok to cry
             statement.setInt(1, hop.getLikes() + 1);
+            statement.setInt(2, hop.getId());
+
             statement.execute();
+
         } catch (SQLException ex) {
             System.out.println(ex);
         } catch (ClassNotFoundException ex) {
-        }
-    }
-
-    public static void likeHop(String content) {
-        for (hop hops : hopsList) {
-            //if (hops.getContent().equals(content)) {
-                hops.setLikes(hops.getLikes() + 1);
-            //}
+            // todo something later
         }
     }
 }
