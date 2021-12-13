@@ -22,29 +22,29 @@
         
     </nav>
     <body>
-        <div class ="h2">
+        <div class ="secondary_header">
             <h1>Search for Users</h1></div>
         <form action="hopperServlet" method="post">
             <div>
                 <label>Username</label>
                 <input type="text" name="user_id"/></br> 
             </div>
-            <div>
+            <div class = secondary_header>
                 <input type='hidden' name='action' value='searchUser'/>
                 <input type='submit' value='Search User'/></br>
             </div>
         </form>
         <form action="hopperServlet" method="post">
-            <div>
+            <div class = secondary_header>
                 <label>ID to follow</label>
                 <input type="text" name="follow_user_id"/></br> 
             </div>
-            <div>
+            <div class = secondary_header>
                 <input type='hidden' name='action' value='followUser'/>
                 <input type='submit' value='Follow'/></br>
             </div>
         </form>
-        <table>
+        <table class = secondary_header>
             <tr>
                 <td>user_id:</td>
                 <td>HOP:</td>

@@ -21,7 +21,7 @@
     </nav>
     <body>
         <h1>User List</h1>
-        <table>
+        <table class = left_article>
             <th>
             <tr>
                 <td>id</td>
@@ -34,14 +34,15 @@
                 <td><c:out value="${user.userName}" /></td>
             </tr>
         </c:forEach>
-    </table>    
-    <h2>Search User</h2>
+    </table>
+        <div class ="secondary_header">
+    <h2>Search User</h2></div>
     <form action="hopperServlet" method="post">
-        <div>
+        <div class = "secondary_header">
             <label>Username</label>
             <input type="text" name="user_id"/></br> 
         </div>
-        <div>
+        <div class = secondary_header>
             <input type='hidden' name='action' value='searchUser'/>
             <input type='submit' value='Search User'/></br>
         </div>
