@@ -36,7 +36,7 @@
                 <input type='submit' value='Post'/></br>
             </div>
         </form>
-        <form action="uploadImage" method="post" enctype="multipart/form-data">
+        <form action="hopperServlet" method="post" enctype="multipart/form-data">
             <div class = secondary_header>
                 <input type="file" accept="image/*" name="file">
             </div>

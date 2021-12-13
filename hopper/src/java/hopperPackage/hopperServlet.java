@@ -1,10 +1,14 @@
 package hopperPackage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import jdk.internal.util.StaticProperty;
 
 @WebServlet(urlPatterns = {"/hopperServlet"})
@@ -172,6 +177,8 @@ public class hopperServlet extends HttpServlet {
 
             response.sendRedirect("hopperServlet?action=personsHops");
         } else if (request.getParameter("action").equalsIgnoreCase("postHopImage")) {
+
+            /*
             int user_id = 0;
             String file = request.getParameter("file");
             //https://stackoverflow.com/questions/22804409/get-cookie-value-in-java/46121394
@@ -190,10 +197,69 @@ public class hopperServlet extends HttpServlet {
                     hopModel.addHop(hops);
                 }
             }
-
             response.sendRedirect("hopperServlet?action=hopperHomePage");
+             */
+            InputStream inputStream = null; // input stream of the upload file
+            String fileName = "";
+            // obtains the upload file part in this multipart request
+            Part filePart = request.getPart("file");
+            if (filePart != null) {
+                fileName = extractFileName(filePart);
+                // obtains input stream of the upload file
+                inputStream = filePart.getInputStream();
+            }
 
+            try {
+                HttpSession session = request.getSession();
+                String username = session.getAttribute("username").toString();
+                int user_id = 0;
+                String file = request.getParameter("file");
+                //https://stackoverflow.com/questions/22804409/get-cookie-value-in-java/46121394
+                Cookie[] cookies = request.getCookies();
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if (UserModel.uniqueUsername(username)) {
+                            user_id = UserModel.getIDfromUsername(username);
+                        }
+                    }
+                    Connection connection = DBConnection.getConnection();
+                    String preparedSQL = "insert into hop (user_id, image, filename) "
+                            + " values ( ?, ?, ? )";
+                    PreparedStatement preparedStatement = connection.prepareStatement(preparedSQL);
+
+                    preparedStatement.setInt(1, user_id);
+                    preparedStatement.setBlob(2, inputStream);
+                    preparedStatement.setString(3, fileName);
+
+                    preparedStatement.executeUpdate();
+
+                    preparedStatement.close();
+                    connection.close();
+
+                  //  String url = "hopperServlet?action=hopperHomePage";
+                  //  getServletContext().getRequestDispatcher(url).forward(request, response);
+
+                }
+            } catch (SQLException exception) {
+                System.out.println(exception);
+            } catch (ClassNotFoundException exception) {
+                System.out.println(exception);
+            }
+            response.sendRedirect("hopperServlet?action=hopperHomePage");
         }
+    }
+
+    //https://www.codejava.net/java-ee/servlet/java-file-upload-example-with-servlet-30-api
+    public static String extractFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=") + 2, s.length() - 1);
+            }
+        }
+        return "";
+
     }
 
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException {

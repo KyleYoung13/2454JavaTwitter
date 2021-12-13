@@ -10,6 +10,8 @@ public class hop implements Serializable {
     private String content;
     private String datetime;
     private int likes;
+    
+    // Able to use String?? OR not even need the image inputStream in class? 
     private InputStream image;
     private String filename;
 

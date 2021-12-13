@@ -24,6 +24,7 @@ import javax.servlet.http.Part;
  * @author andre
  */
 @WebServlet(name = "uploadImage", urlPatterns = {"/uploadImage"})
+
 @MultipartConfig(maxFileSize = 1000000)
 public class uploadImage extends HttpServlet {
 
@@ -54,16 +55,19 @@ public class uploadImage extends HttpServlet {
             HttpSession session = request.getSession();
             String username = session.getAttribute("username").toString();
             int user_id = UserModel.getIDfromUsername(username);
-
             Connection connection = DBConnection.getConnection();
             String preparedSQL = "insert into hop (user_id, image, filename) "
                     + " values ( ?, ?, ? )";
             PreparedStatement preparedStatement = connection.prepareStatement(preparedSQL);
 
-
+            preparedStatement.setInt(1, user_id);
+            preparedStatement.setBlob(2, inputStream);
+            preparedStatement.setString(3, fileName);          
+            
             preparedStatement.setInt(1, user_id);
             preparedStatement.setBlob(2, inputStream);
             preparedStatement.setString(3, fileName);
+            
 
             preparedStatement.executeUpdate();
 
