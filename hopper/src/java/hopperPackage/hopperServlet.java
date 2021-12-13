@@ -172,8 +172,24 @@ public class hopperServlet extends HttpServlet {
 
             response.sendRedirect("hopperServlet?action=personsHops");
         } else if (request.getParameter("action").equalsIgnoreCase("postHopImage")) {
-            
-          
+            int user_id = 0;
+            String file = request.getParameter("file");
+            //https://stackoverflow.com/questions/22804409/get-cookie-value-in-java/46121394
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    String username = cookie.getValue();
+                    if (UserModel.uniqueUsername(username)) {
+                        user_id = UserModel.getIDfromUsername(username);
+                    }
+                }
+                if (file.isEmpty()) {
+                    throw new ServletException("Blank input");
+                } else {
+                    hop hops = new hop(0, user_id, "", "", 0);
+                    hopModel.addHop(hops);
+                }
+            }
 
             response.sendRedirect("hopperServlet?action=hopperHomePage");
 
