@@ -62,8 +62,8 @@
     display: none;
 }
 .table,tr{
-    border: 2px solid #001701; 
-    width: 60%;
+    border: 2px solid #be8f02; 
+    width: 70%;
     float: left;
     font-family: 'Bebas Neue', cursive;
     font-size: 20px;
@@ -71,9 +71,9 @@
 }
 
 .tableData{
-    border: 2px solid #001701; 
+    border: 2px solid #be8f02; 
     border-collapse: collapse;
-    width: 60%;
+    width: 70%;
     float: left;
     font-family: 'Bebas Neue', cursive;
     font-size: 50px;
