@@ -55,13 +55,11 @@ public class uploadImage extends HttpServlet {
             Connection connection = DBConnection.getConnection();
             String preparedSQL = "insert into hop (image, filename) "
                     + " values ( ?, ? )";
-            //String preparedSQL = "update hop set image = ?, filename = ? "
-                   // + " where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(preparedSQL);
 
             preparedStatement.setBlob(1, inputStream);
             preparedStatement.setString(2, fileName);
-           // preparedStatement.setString(3, username);
+            preparedStatement.setString(3, username);
 
             preparedStatement.executeUpdate();
 

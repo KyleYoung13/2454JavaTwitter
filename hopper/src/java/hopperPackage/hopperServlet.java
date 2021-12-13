@@ -136,8 +136,12 @@ public class hopperServlet extends HttpServlet {
                         user_id = UserModel.getIDfromUsername(username);
                     }
                 }
-                hop hops = new hop(0, user_id, content, "", 0);
-                hopModel.addHop(hops);
+                if (content.isEmpty() || content == null) {
+                    throw new ServletException("Blank input");
+                } else {
+                    hop hops = new hop(0, user_id, content, "", 0);
+                    hopModel.addHop(hops);
+                }
             }
             response.sendRedirect("hopperServlet?action=hopperHomePage");
         } else if (request.getParameter("action").equalsIgnoreCase("like")) {

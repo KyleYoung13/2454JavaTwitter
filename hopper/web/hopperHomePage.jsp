@@ -21,7 +21,7 @@
         <a href="hopperServlet?action=hopperHomePage">Home Page</a>
         <a href="hopperServlet?action=personsHops">User Hops</a>
     </nav>
-    <body>
+    <body class = "container">
         <div class ="secondary_header">
             <h1>Home Page</h1></div>
         <div class ="secondary_header">
@@ -36,7 +36,7 @@
                 <input type='submit' value='Post'/></br>
             </div>
         </form>
-        <form action="uploadImage" method="post" enctype="multipart/form-data">
+        <form action="/uploadImage" method="post" enctype="multipart/form-data">
             <div class = secondary_header>
                 <input type="file" accept="image/*" name="file">
             </div>
@@ -46,28 +46,27 @@
                 <input type="submit" value="Post Image"><br>
             </div>
         </form>
-        <table class = left_article>
+        <table>
             <c:forEach var="hop" items="${hopsList}">
                 <tr>
                     <td>hop_id:</td>
                     <td><c:out value="${hop.id}" /></td>
                     <td>user_id:</td>
                     <td><c:out value="${hop.user_id}" /></td>
-                    <td>HOP:</td>
-                    <td><c:out value="${hop.content}" /></td>
-                </tr>
-                <tr>
                     <td>date time:</td>
                     <td><c:out value="${hop.datetime}" /></td>
+                    <td class = "tableData"><c:out value="${hop.content}" /></td>
+                
+                    
                     <td>likes:</td>
                     <td><c:out value="${hop.likes}" /></td>
                     <td>
-                        <form action="uploadImage" method="post">
-                            <div class = secondary_header>
+                        <form action="hopperServlet" method="post">
+                            <div>
                                 <label>Enter Hop ID</label>
                                 <input type="text" name="like_id"/></br> 
                             </div>
-                            <div class = secondary_header>
+                            <div class>
                                 <input type='hidden' name='action' value='like'/>
                                 <input type='submit' value='Like Hop'/></br>
                             </div>
