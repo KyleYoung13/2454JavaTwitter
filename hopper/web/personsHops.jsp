@@ -26,7 +26,7 @@
             <h1>Search for Users</h1></div>
         <form action="hopperServlet" method="post">
             <div>
-                <label>ID</label>
+                <label>Username</label>
                 <input type="text" name="user_id"/></br> 
             </div>
             <div>

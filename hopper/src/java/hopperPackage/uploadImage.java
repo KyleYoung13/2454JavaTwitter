@@ -50,6 +50,7 @@ public class uploadImage extends HttpServlet {
 
         try {
             HttpSession session = request.getSession();
+            String username = session.getAttribute("username").toString();
             
             Connection connection = DBConnection.getConnection();
             String preparedSQL = "insert into hop (image, filename) "

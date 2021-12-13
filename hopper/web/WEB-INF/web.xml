@@ -12,6 +12,14 @@
         <servlet-name>hopperServlet</servlet-name>
         <url-pattern>/hopperSrervlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>uploadImage</servlet-name>
+        <servlet-class>hopper.uploadImage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>uploadImage</servlet-name>
+        <url-pattern>/uploadImage</url-pattern>
+    </servlet-mapping>
     
 
     <session-config>

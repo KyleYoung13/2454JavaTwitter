@@ -57,6 +57,17 @@ public class hopModel {
         }
         return singlePersonHops;
     }
+    public static ArrayList<hop> HopsFromUsername(String uName) {
+        getHops();
+        ArrayList<hop> singlePersonHops = new ArrayList<>();
+        int id = UserModel.getIDfromUsername(uName);
+        for (hop hops : hopsList) {
+            if (hops.getUser_id() == id){
+                singlePersonHops.add(hops);
+            }
+        }
+        return singlePersonHops;
+    }
 
     public static ArrayList<hop> getFollowHops(int userId) {
         getHops();
@@ -94,6 +105,7 @@ public class hopModel {
         }
         return "";
     }
+    
 
     public static void deleteHop(hop hop) {
         try {

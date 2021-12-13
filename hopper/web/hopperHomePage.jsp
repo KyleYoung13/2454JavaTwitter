@@ -36,7 +36,7 @@
                 <input type='submit' value='Post'/></br>
             </div>
         </form>
-        <form action="hopperServlet?action=uploadImage" method="post" enctype="multipart/form-data">
+        <form action="uploadImage" method="post" enctype="multipart/form-data">
             <div class = secondary_header>
                 <input type="file" accept="image/*" name="file">
             </div>
@@ -62,7 +62,7 @@
                     <td>likes:</td>
                     <td><c:out value="${hop.likes}" /></td>
                     <td>
-                        <form action="hopperServlet" method="post">
+                        <form action="uploadImage" method="post">
                             <div class = secondary_header>
                                 <label>Enter Hop ID</label>
                                 <input type="text" name="like_id"/></br> 

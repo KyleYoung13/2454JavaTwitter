@@ -13,7 +13,7 @@
         <title>User List Page</title>
     </head>
     <div class = primary_header>
-            <a href = "hopperHomePage.jsp"><img src="images/beer-bubbless.jpg" alt ="hopper_header" /> </a></div>
+        <a href = "hopperHomePage.jsp"><img src="images/beer-bubbless.jpg" alt ="hopper_header" /> </a></div>
     <nav class = secondary_header> 
         <a href="hopperServlet?action=userlist">List Users</a>
         <a href="hopperServlet?action=hopperHomePage">Home Page</a>
@@ -35,25 +35,10 @@
             </tr>
         </c:forEach>
     </table>    
-    <h2>Update User</h2>
-    <form action="hopperServlet" method="post">
-        <div>
-            <label>ID</label>
-            <input type="text" name="id"/></br> 
-            <label>Username</label>
-            <input type="text" name="username"/></br> 
-            <label>Password</label>
-            <input type="password" name="password"/></br> 
-        </div>
-        <div>
-            <input type='hidden' name='action' value='updateUser'/>
-            <input type='submit' value='Update User'/></br>
-        </div>
-    </form>
     <h2>Search User</h2>
     <form action="hopperServlet" method="post">
         <div>
-            <label>ID</label>
+            <label>Username</label>
             <input type="text" name="user_id"/></br> 
         </div>
         <div>

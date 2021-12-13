@@ -63,6 +63,10 @@ public class hopperServlet extends HttpServlet {
                         throw new ServletException("Blank input");
                     } else {
                         UserModel.addUser(user);
+                        HttpSession session = request.getSession();
+                        session.setAttribute(userName, request);
+                        Cookie cookie = new Cookie("usernameCookie", userName);
+                        response.addCookie(cookie);
                     }
 
                 } catch (NoSuchAlgorithmException ex) {
@@ -94,20 +98,17 @@ public class hopperServlet extends HttpServlet {
             }
             response.sendRedirect("hopperServlet");
         } else if (request.getParameter("action").equalsIgnoreCase("searchUser")) {
-            int id = Integer.parseInt(request.getParameter("user_id"));
-            if (id == 0) {
+            String userName = request.getParameter("user_id");
+            if (userName == null || userName.isEmpty()) {
                 throw new ServletException("Blank input");
             } else {
-                ArrayList<hop> hopList = hopModel.getUsersHops(id);
+                ArrayList<hop> hopList = hopModel.HopsFromUsername(userName);
                 request.setAttribute("hopList", hopList);
                 String url = "/personsHops.jsp";
                 getServletContext().getRequestDispatcher(url).forward(request, response);
             }
         } //START OF HOPPER HOME PAGE
         else if (request.getParameter("action").equalsIgnoreCase("hopperHomePage")) {
-            //ArrayList<hop> hopsList = hopModel.getHops();
-            //request.setAttribute("hopsList", hopsList);
-
             int user_id = 0;
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
@@ -166,10 +167,12 @@ public class hopperServlet extends HttpServlet {
             followingModel.addFollow(follow);
 
             response.sendRedirect("hopperServlet?action=personsHops");
-        }
-        else if (request.getParameter("action").equalsIgnoreCase("postHopImage")) {
+        } else if (request.getParameter("action").equalsIgnoreCase("postHopImage")) {
+            
+          
+
             response.sendRedirect("hopperServlet?action=hopperHomePage");
-           
+
         }
     }
 
