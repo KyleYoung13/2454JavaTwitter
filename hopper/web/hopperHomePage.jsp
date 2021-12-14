@@ -72,4 +72,5 @@
             </c:forEach>
         </table>
     </body>
+    <footer class = "footer">2021 - Beer is Hydration&copy;</footer>
 </html>

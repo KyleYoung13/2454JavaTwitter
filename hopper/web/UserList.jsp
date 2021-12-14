@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>User List Page</title>
+    <link href ="resources/css.css" type ="text/css" rel ="stylesheet"/>
     </head>
     <div class = primary_header>
         <a href = "hopperHomePage.jsp"><img src="images/beer-bubbless.jpg" alt ="hopper_header" /> </a></div>
@@ -20,20 +21,19 @@
         <a href="hopperServlet?action=personsHops">User Hops</a>
     </nav>
     <body>
-        <h1>User List</h1>
-        <table class = left_article>
+        <div class ="secondary_header">
+        <table class = "tabletwo">
             <th>
-            <tr>
-                <td>id</td>
-                <td>username</td>
-            </tr>
-        </th>
+            <td>ID</td>
+            <td>USERNAME</td>
+            </th>
+            
         <c:forEach var="user" items="${users}">
             <tr>
                 <td><c:out value="${user.id}" /></td>
-                <td><c:out value="${user.userName}" /></td>
+                <td><c:out value="${user.userName}" /></td> 
             </tr>
-        </c:forEach>
+        </c:forEach>       
     </table>
         <div class ="secondary_header">
     <h2>Search User</h2></div>
@@ -48,4 +48,5 @@
         </div>
     </form>
 </body>
+<footer class = "footer">2021 - Beer is Hydration&copy;</footer>
 </html>

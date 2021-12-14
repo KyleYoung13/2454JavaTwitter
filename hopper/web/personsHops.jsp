@@ -21,7 +21,7 @@
         <a href="hopperServlet?action=personsHops">User Hops</a>
         
     </nav>
-    <body>
+    <body class = container>
         <div class ="secondary_header">
             <h1>Search for Users</h1></div>
         <form action="hopperServlet" method="post">
@@ -57,4 +57,5 @@
             </c:forEach>
         </table>   
     </body>
+    <footer class = "footer">2021 - Beer is Hydration&copy;</footer>
 </html>

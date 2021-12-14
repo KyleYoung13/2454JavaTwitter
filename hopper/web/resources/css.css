@@ -42,6 +42,7 @@
     font-size: 36px;
     margin-left: auto;
     margin-right: auto;
+    float: left;
 
 
 }
@@ -68,6 +69,7 @@
     font-family: 'Bebas Neue', cursive;
     font-size: 20px;
     color: #f7e7b7;
+    background-color: #e8bb31;
 }
 
 .tableData{
@@ -79,12 +81,26 @@
     font-size: 50px;
     color: #f7e7b7;
 }
+.tabletwo{
+     border: 2px solid #be8f02; 
+    width: 10%;
+    float: left;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 24px;
+    color: #f7e7b7;
+    background-color: #e8bb31;
+}
+    
+
 
 
 
 
 .footer {
-    background-color: #001701;
+    background-color: #e8bb31;
+    font-family: 'Bebas Neue', cursive;
+    color: #f7e7b7;
+    text-align: center;
 }
 .title {
     font-weight: bold;
