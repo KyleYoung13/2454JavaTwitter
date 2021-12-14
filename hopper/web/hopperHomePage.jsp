@@ -26,24 +26,16 @@
             <h1>Home Page</h1></div>
         <div class ="secondary_header">
             <h2>Post Hop</h2></div>
-        <form action="hopperServlet" method="post">
+        <form action="hopperServlet" method="post" enctype="multipart/form-data">
             <div class = secondary_header>
                 <label>Type Here</label>
                 <input type="text" name="content"/></br> 
-            </div>
-            <div class = secondary_header>
-                <input type='hidden' name='action' value='addHop'/>
-                <input type='submit' value='Post'/></br>
-            </div>
-        </form>
-        <form action="hopperServlet" method="post" enctype="multipart/form-data">
-            <div class = secondary_header>
                 <input type="file" accept="image/*" name="file">
             </div>
             <div class = secondary_header>
-                <label>&nbsp;</label>
-                <input type='hidden' name='action' value='postHopImage'/>
-                <input type="submit" value="Post Image"><br>
+                <input type="hidden" name="action" value="addHop"/>
+                <input type='submit' value='Post'/></br>
+                
             </div>
         </form>
         <table>
@@ -56,8 +48,7 @@
                     <td>date time:</td>
                     <td><c:out value="${hop.datetime}" /></td>
                     <td class = "tableData"><c:out value="${hop.content}" /></td>
-                
-                    
+  
                     <td>likes:</td>
                     <td><c:out value="${hop.likes}" /></td>
                     <td>

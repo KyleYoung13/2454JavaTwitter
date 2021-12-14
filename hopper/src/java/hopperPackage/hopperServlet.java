@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +22,7 @@ import javax.servlet.http.Part;
 import jdk.internal.util.StaticProperty;
 
 @WebServlet(urlPatterns = {"/hopperServlet"})
+@MultipartConfig(maxFileSize = 1000000)
 public class hopperServlet extends HttpServlet {
 
     /**
@@ -130,6 +132,8 @@ public class hopperServlet extends HttpServlet {
             String url = "/hopperHomePage.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         } else if (request.getParameter("action").equalsIgnoreCase("addHop")) {
+            InputStream inputStream = null; // input stream of the upload file
+            String fileName = "";
             String content = request.getParameter("content");
             int user_id = 0;
             //https://stackoverflow.com/questions/22804409/get-cookie-value-in-java/46121394
@@ -141,11 +145,22 @@ public class hopperServlet extends HttpServlet {
                         user_id = UserModel.getIDfromUsername(username);
                     }
                 }
-                if (content.isEmpty() || content == null) {
-                    throw new ServletException("Blank input");
+                // obtains the upload file part in this multipart request
+                Part filePart = request.getPart("file");
+                if (filePart != null) {
+                    fileName = extractFileName(filePart);
+                    // obtains input stream of the upload file
+                    inputStream = filePart.getInputStream();
+                    String file = request.getParameter("file");
+                    hop hop = new hop(0, user_id, content, "", 0, inputStream, file);
+                    hopModel.addHopImage(hop);
                 } else {
-                    hop hops = new hop(0, user_id, content, "", 0);
-                    hopModel.addHop(hops);
+                    if (content.isEmpty() || content == null) {
+                        throw new ServletException("Blank input");
+                    } else {
+                        hop hops = new hop(0, user_id, content, "", 0);
+                        hopModel.addHop(hops);
+                    }
                 }
             }
             response.sendRedirect("hopperServlet?action=hopperHomePage");
@@ -176,35 +191,7 @@ public class hopperServlet extends HttpServlet {
             followingModel.addFollow(follow);
 
             response.sendRedirect("hopperServlet?action=personsHops");
-        } else if (request.getParameter("action").equalsIgnoreCase("postHopImage")) {
-            InputStream inputStream = null; // input stream of the upload file
-            String fileName = "";
-            // obtains the upload file part in this multipart request
-            Part filePart = request.getPart("file");
-            if (filePart != null) {
-                fileName = extractFileName(filePart);
-                // obtains input stream of the upload file
-                inputStream = filePart.getInputStream();
-            }
-
-            String content = request.getParameter("content");
-            int user_id = 0;
-            String file = request.getParameter("file");
-            //https://stackoverflow.com/questions/22804409/get-cookie-value-in-java/46121394
-            Cookie[] cookies = request.getCookies();
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    String username = cookie.getValue();
-                    if (UserModel.uniqueUsername(username)) {
-                        user_id = UserModel.getIDfromUsername(username);
-                    }
-                }
-                hop hop = new hop(0, user_id, content, "", 0, inputStream, file);
-                hopModel.addHopImage(hop);
-            }
-            response.sendRedirect("hopperServlet?action=hopperHomePage");
         }
-
     }
 
     //https://www.codejava.net/java-ee/servlet/java-file-upload-example-with-servlet-30-api

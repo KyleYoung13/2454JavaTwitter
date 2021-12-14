@@ -44,8 +44,6 @@ public class hopModel {
         }
         return hopsList;
     }
-    
-    
 
     public static ArrayList<hop> getUsersHops(int idString) {
         getHops();
@@ -57,12 +55,13 @@ public class hopModel {
         }
         return singlePersonHops;
     }
+
     public static ArrayList<hop> HopsFromUsername(String uName) {
         getHops();
         ArrayList<hop> singlePersonHops = new ArrayList<>();
         int id = UserModel.getIDfromUsername(uName);
         for (hop hops : hopsList) {
-            if (hops.getUser_id() == id){
+            if (hops.getUser_id() == id) {
                 singlePersonHops.add(hops);
             }
         }
@@ -86,7 +85,6 @@ public class hopModel {
         }
         return followHops;
     }
-    
 
     public static String addHop(hop hop) {
         try {
@@ -105,15 +103,18 @@ public class hopModel {
         }
         return "";
     }
+
     public static String addHopImage(hop hop) {
         try {
             Connection connection = DBConnection.getConnection();
-            String preparedSQL = "insert into hop (user_id, image, filename) "
-                    + " values ( ?, ?, ? )";
+            String preparedSQL = "insert into hop (user_id, content, image, filename, likes) "
+                    + " values ( ?, ?, ? , ?, ?)";
             PreparedStatement statement = connection.prepareStatement(preparedSQL);
             statement.setInt(1, hop.getUser_id());
-            statement.setBlob(2, hop.getImage());
-            statement.setString(3, hop.getFilename());
+            statement.setString(2, hop.getContent());
+            statement.setBlob(3, hop.getImage());
+            statement.setString(4, hop.getFilename());
+            statement.setInt(5, hop.getLikes());
             statement.execute();
         } catch (SQLException ex) {
             return ex.toString();
@@ -122,7 +123,6 @@ public class hopModel {
         }
         return "";
     }
-    
 
     public static void deleteHop(hop hop) {
         try {
