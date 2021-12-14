@@ -152,7 +152,7 @@ public class hopperServlet extends HttpServlet {
                     // obtains input stream of the upload file
                     inputStream = filePart.getInputStream();
                     String file = request.getParameter("file");
-                    hop hop = new hop(0, user_id, content, "", 0, inputStream, file);
+                    hop hop = new hop(0, user_id, content, "", 0, inputStream, fileName);
                     hopModel.addHopImage(hop);
                 } else {
                     if (content.isEmpty() || content == null) {

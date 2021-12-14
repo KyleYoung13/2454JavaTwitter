@@ -38,8 +38,8 @@ public class getImage extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        // https://mail.codejava.net/coding/how-to-display-images-from-database-in-jsp-page-with-java-servlet#:~:text=%20How%20to%20display%20images%20from%20database%20in,image%20source%20is%20the%20base64%20string.%20More%20
-        String userName = request.getParameter("username");
+        //https://mail.codejava.net/coding/how-to-display-images-from-database-in-jsp-page-with-java-servlet#:~:text=%20How%20to%20display%20images%20from%20database%20in,image%20source%20is%20the%20base64%20string.%20More%20
+        String id = request.getParameter("id");
 
         try {
             Connection connection = DBConnection.getConnection();
@@ -47,7 +47,7 @@ public class getImage extends HttpServlet {
             PreparedStatement preparedStatement = connection.prepareStatement(preparedSQL);
 
             // TODO FIX USERNAME FOR ID
-            preparedStatement.setString(1, userName);
+            preparedStatement.setString(1, id);
 
             ResultSet result = preparedStatement.executeQuery();
             Blob blob = null;

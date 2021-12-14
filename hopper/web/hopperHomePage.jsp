@@ -4,6 +4,7 @@
     Author     : andre
 --%>
 
+<%@page import="hopperPackage.hop"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page errorPage="error.jsp" %>
@@ -35,7 +36,7 @@
             <div class = secondary_header>
                 <input type="hidden" name="action" value="addHop"/>
                 <input type='submit' value='Post'/></br>
-                
+
             </div>
         </form>
         <table>
@@ -48,7 +49,11 @@
                     <td>date time:</td>
                     <td><c:out value="${hop.datetime}" /></td>
                     <td class = "tableData"><c:out value="${hop.content}" /></td>
-  
+
+                    <td>
+                        <img src="hopperServlet/getImage?id=${hop.id}" width="200" height="200"/>
+                    </td>
+
                     <td>likes:</td>
                     <td><c:out value="${hop.likes}" /></td>
                     <td>
