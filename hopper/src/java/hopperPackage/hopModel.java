@@ -112,8 +112,7 @@ public class hopModel {
                     + " values ( ?, ?, ? )";
             PreparedStatement statement = connection.prepareStatement(preparedSQL);
             statement.setInt(1, hop.getUser_id());
-            // Can set as string instead of inputstream???
-            //statement.setString(2, hop.getImage());
+            statement.setBlob(2, hop.getImage());
             statement.setString(3, hop.getFilename());
             statement.execute();
         } catch (SQLException ex) {
