@@ -51,7 +51,7 @@
                     <td class = "tableData"><c:out value="${hop.content}" /></td>
 
                     <td>
-                        <img src="hopperServlet/getImage?id=${hop.id}" width="200" height="200"/>
+                        <img src="getImage?id=${hop.id}" width="200" height="200"/>
                     </td>
 
                     <td>likes:</td>

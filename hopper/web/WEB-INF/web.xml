@@ -14,7 +14,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>getImage</servlet-name>
-        <servlet-class>hopper.getImage</servlet-class>
+        <servlet-class>hopperPackage.getImage</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getImage</servlet-name>
