@@ -13,6 +13,7 @@
         <title>User List Page</title>
     <link href ="resources/css.css" type ="text/css" rel ="stylesheet"/>
     </head>
+    <main>
     <div class = primary_header>
         <a href = "hopperHomePage.jsp"><img src="images/beer-bubbless.jpg" alt ="hopper_header" /> </a></div>
     <nav class = secondary_header> 
@@ -47,6 +48,7 @@
             <input type='submit' value='Search User'/></br>
         </div>
     </form>
+    </main>
 </body>
 <footer class = "footer">2021 - Beer is Hydration&copy;</footer>
 </html>

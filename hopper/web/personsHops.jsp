@@ -25,7 +25,7 @@
         <div class ="secondary_header">
             <h1>Search for Users</h1></div>
         <form action="hopperServlet" method="post">
-            <div>
+            <div class = "secondary_header">
                 <label>Username</label>
                 <input type="text" name="user_id"/></br> 
             </div>
@@ -53,6 +53,9 @@
                 <tr>                   
                     <td><c:out value="${hop.user_id}" /></td>
                     <td><c:out value="${hop.content}" /></td>
+                    <td>
+                        <img src="getImage?id=${hop.id}" width="200" height="200"/>
+                    </td>
                 </tr>
             </c:forEach>
         </table>   

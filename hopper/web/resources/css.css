@@ -20,6 +20,10 @@
     height: 300px;
     border: none;
 }
+main{
+    height:1024px;
+    width: 100%;
+}
 
 .primary_header {
     width: 100%;
